@@ -1,0 +1,57 @@
+// NativeScript core theme
+// @see https://docs.nativescript.org/ui/theme
+// @import '~nativescript-theme-core/scss/light';
+@import './styles/scss/shakedeal';
+
+// Override variables here
+
+@import './styles/scss/index';
+
+
+.b-radius {
+    border-radius: 50%;
+}
+
+.c-success-text{
+  color: #37b24d;
+}
+
+.c-danger{
+    color: #cd2823;
+}
+
+.card-text {
+    font-family:  'AvenirNextLTPro';
+    font-size: 14;
+    font-weight: 500;
+}
+
+.card-header {
+    font-family: 'AvenirNextLTPro';
+    font-size: 16;
+    font-weight: 900;
+    color: #6c798f;
+}
+
+.c-white {
+    color: white;
+}
+
+.c-dark {
+    color: #404553;
+}
+
+.fa {
+    font-family: "Font Awesome 5 Pro", "fa-regular-400";
+    font-weight: 400;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Pro", "fa-solid-900";
+    font-weight: 900;
+}
+
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+    font-weight: 400;
+}

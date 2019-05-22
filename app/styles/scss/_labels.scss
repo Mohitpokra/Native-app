@@ -1,0 +1,107 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: $headings-margin-bottom;
+  font-weight: $headings-font-weight;
+  color: $headings-color;
+}
+
+.body,
+.body2,
+.footnote {
+  font-weight: normal;
+  color: $secondary;
+}
+
+.h1 {
+  font-size: 24;
+  font-weight: 900;
+}
+
+.card-number {
+  font-family: 'AvenirNextLTPro';
+  font-size: 32;
+  font-weight: 500;
+  color: #6c798f;
+  margin-left: 10;
+  margin-bottom: 30;
+}
+
+.h2-light {
+  font-family: 'AvenirNextLTPro';
+  font-size: 18;
+  font-weight: 900;
+  color: #000000;
+  opacity: 0.2;
+}
+
+.h2 {
+  font-family: 'AvenirNextLTPro';
+  font-size: 18;
+  font-weight: 900;
+  color: #000000;
+}
+
+
+.h3 {
+  font-family: 'AvenirNextLTPro';
+  font-size: 16;
+  font-weight: 900;
+  color: #404553;
+}
+
+.h3-card {
+  font-family: 'AvenirNextLTPro';
+  font-size: 16;
+  font-weight: 900;
+  color: #6c798f;
+}
+
+.h4-filter-block {
+  font-family: 'AvenirNextLTPro';
+  font-size: 14;
+  font-weight: 500;
+  color: #373844;
+}
+
+.h4-card-block {
+  font-family: 'AvenirNextLTPro';
+  font-size: 14;
+  font-weight: 500;
+  color: #373844;
+}
+
+.h4 {
+  font-family: 'AvenirNextLTPro';
+  font-size: 14;
+  font-weight: 500;
+  color: #404553;
+}
+
+.h5 {
+  font-family: 'AvenirNextLTPro';
+  font-size: 12;
+  font-weight: 500;
+  color: #7e8595;
+}
+
+.h6 {
+  font-family: 'AvenirNextLTPro';
+  font-size: 10;
+  color: #b4b4b4;
+}
+
+.body {
+  font-size: 14;
+}
+
+.body2 {
+  font-size: 17;
+}
+
+.footnote {
+  font-size: 13;
+}
