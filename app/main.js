@@ -35,8 +35,6 @@ Vue.registerElement('CheckBox', () => require('nativescript-checkbox').CheckBox,
     event: 'checkedChange'
   }
 });
-Vue.registerElement('RadioGroup', () => require('nativescript-radiobutton').RadioGroup)
-Vue.registerElement('RadioButton', () => require('nativescript-radiobutton').RadioButton)
 Vue.registerElement(
   'CardView',
   () => require('nativescript-cardview').CardView

@@ -21,7 +21,7 @@
                       src="~/images/profile.png"
                     />
                 </StackLayout>
-                <StackLayout class="m-l-15" verticalAlignment="middle">
+                <StackLayout class="m-l-5" verticalAlignment="middle">
                     <Label class="h3 c-white" :text="userName"/>
                 </StackLayout>
             </StackLayout>
@@ -100,26 +100,13 @@ export default {
 </script>
 
 <style>
+
 .bg-dark {
     background-color: #404553
 }
 
 .bg-trans {
     background-color: rgba(255, 255, 255, 0.12);
-}
-
-.drawer-text {
-    font-family: 'AvenirNextLTPro';
-    font-size: 14;
-    margin: 12 15;
-    font-weight: 900;
-    color: #ffffff;
-}
-
-.image-sub-text {
-    font-size: 12;
-    font-weight: 900;
-    color: rgb(255, 255, 255, 0.5);
 }
 
 .action-bar-title {

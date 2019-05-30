@@ -26,7 +26,6 @@ const state = {
         active: 0,
         hidden: 0,
         disable: 0
-        // categories: 0
     },
     category: {
         total: 0
@@ -93,12 +92,7 @@ const state = {
     compareCustomerPieGraphData: []
 }
 
-const getters = {
-}
-
-
 const mutations = {
-
     resetDate(state) {
         state.givenDate.date1 = +Vue.moment();
         state.givenDate.date2 = +Vue.moment();
@@ -135,22 +129,6 @@ const mutations = {
         let graphData = categorizedOrderGraphData(state.order);
         state.orderPieGraphData = graphData;
         state.order['total'] = total;
-        // let total = 0;
-        // let graphData = [];
-        // for (let status of payload) {
-        //     let key = status.description.toLowerCase().replace(/\s/g, '');
-        //     total = total + status.count;
-        //     if (status.count > 0) {
-        //         let obj = {};
-        //         obj.status = status.description;
-        //         obj.count = Number(status.count);
-        //         obj.title = `${status.description} ${status.count}`;
-        //         graphData.push(obj);
-        //     }
-        //     state.order[key] = status.count;
-        // }
-        // state.orderPieGraphData = graphData;
-        // state.order['total'] = total;
     },
     setCategory(state, payload) {
         state.category.total = payload.total;
@@ -173,37 +151,6 @@ const mutations = {
             graphData.push(data);
         }
         state.productPieGraphData = graphData;
-        // state.product.active = payload.active || state.product.active;
-        // state.product.hidden = payload.hidden || state.product.hidden;
-        // state.product.disable = payload.disable || state.product.disable;
-        // state.product.categories = payload.categories || state.product.categories;
-
-        // if (!state.product.active && !state.product.hidden && !state.product.disable) {
-        //     state.productPieGraphData = [];
-        //     return;
-        // }
-
-        // let graph = [{
-        //     status: 'Active',
-        //     count: Number(state.product.active),
-        //     title: `Active ${Number(state.product.active)}`
-
-        // },
-        // {
-        //     status: 'Disable',
-        //     count: Number(state.product.disable),
-        //     title: `Disable ${Number(state.product.disable)}`
-
-        // },
-        // {
-        //     status: 'Hidden',
-        //     count: Number(state.product.hidden),
-        //     title: `Hidden ${Number(state.product.hidden)}`
-
-        // }];
-
-        // state.productPieGraphData = graph;
-
     },
     setVendor(sate, payload) {
         if (payload.length === 0) {
@@ -242,10 +189,6 @@ const mutations = {
             graphData.push(data);
         }
         state.customerPieGraphData = graphData;
-        // for (let obj of payload) {
-        //     let key = fullStatus(obj.status);
-        //     state.customer[key] = obj.count;
-        // }
     },
     setTotalCategory(state, payload) {
        state.totalCategory.total = payload.total;
@@ -268,38 +211,6 @@ const mutations = {
             graphData.push(data);
         }
         state.totalProductPieGraphData = graphData;
-        // state.totalProduct.total = payload.total || 0;
-        // state.totalProduct.active = payload.active || 0;
-        // state.totalProduct.hidden = payload.hidden || 0;
-        // state.totalProduct.disable = payload.disable || 0;
-        // state.totalProduct.categories = payload.categories || 0;
-
-        // if (!state.totalProduct.total && !state.totalProduct.active && !state.totalProduct.hidden && !state.totalProduct.disable) {
-        //     state.totalProductPieGraphData = graph;
-        //     return;
-        // }
-
-        // let graph = [{
-        //     status: 'Active',
-        //     count: Number(payload.active),
-        //     title: `Active ${Number(payload.active)}`
-
-        // },
-        // {
-        //     status: 'Disable',
-        //     count: Number(payload.disable),
-        //     title: `Disable ${Number(payload.disable)}`
-
-        // },
-        // {
-        //     status: 'Hidden',
-        //     count: Number(payload.hidden),
-        //     title: `Hidden ${Number(payload.hidden)}`
-
-        // }];
-
-        // state.totalProductPieGraphData = graph;
-
     },
     setTotalVendor(state, payload) {
         if (payload.length === 0) {
@@ -362,23 +273,6 @@ const mutations = {
         let graphData = categorizedOrderGraphData(state.comparePeriodOrder);
         state.compareOrderPieGraphData = graphData;
         state.comparePeriodOrder['total'] = total;
-
-        // let total = 0;
-        // let graphData = [];
-        // for (let status of payload) {
-        //     let key = status.description.toLowerCase().replace(/\s/g, '');
-        //     total = total + status.count;
-        //     if (status.count > 0) {
-        //         let obj = {};
-        //         obj.status = status.description;
-        //         obj.count = Number(status.count);
-        //         obj.title = `${status.description} ${status.count}`;
-        //         graphData.push(obj);
-        //     }
-        //     state.comparePeriodOrder[key] = status.count;
-        // }
-        // state.compareOrderPieGraphData = graphData;
-        // state.comparePeriodOrder['total'] = total;
     },
 
     setComparePeriodProduct(state, payload) {
@@ -400,37 +294,6 @@ const mutations = {
             graphData.push(data);
         }
         state.compareProductPieGraphData = graphData;
-        // state.comparePeriodProduct.active = payload.active || state.comparePeriodProduct.active;
-        // state.comparePeriodProduct.hidden = payload.hidden || state.comparePeriodProduct.hidden;
-        // state.comparePeriodProduct.disable = payload.disable || state.comparePeriodProduct.disable;
-        // state.comparePeriodProduct.categories = payload.categories || state.comparePeriodProduct.categories;
-
-
-        // if (!state.comparePeriodProduct.active && !state.comparePeriodProduct.hidden && !state.comparePeriodProduct.disable) {
-        //     state.compareProductPieGraphData = graph;
-        //     return;
-        // }
-
-        // let graph = [{
-        //     status: 'Active',
-        //     count: Number(state.comparePeriodProduct.active),
-        //     title: `Active ${Number(state.comparePeriodProduct.active)}`
-
-        // },
-        // {
-        //     status: 'Disable',
-        //     count: Number(state.comparePeriodProduct.disable),
-        //     title: `Disable ${Number(state.comparePeriodProduct.disable)}`
-
-        // },
-        // {
-        //     status: 'Hidden',
-        //     count: Number(state.comparePeriodProduct.hidden),
-        //     title: `Hidden ${Number(state.comparePeriodProduct.hidden)}`
-
-        // }];
-
-        // state.compareProductPieGraphData = graph;
 
     },
     setComparePeriodCustomer(state, payload) {
@@ -452,11 +315,6 @@ const mutations = {
             graphData.push(data);
         }
         state.compareCustomerPieGraphData = graphData;
-        // for (let obj of payload) {
-        //     let key = fullStatus(obj.status);
-        //     state.comparePeriodCustomer[key] = obj.count;
-        // }
-
     },
     setComparePeriodVendor(state, payload) {
         if (payload.length === 0) {
@@ -594,9 +452,9 @@ const actions = {
             commit('setTotalCustomer', data.totalCustomer);
         }).catch(err => {
             let msg = errorMessage(error.response.data);
-            // commit('ui/resetIndicator', null, { root: true });
-            // commit('auth/loginFail', null, { root: true });
-            // commit('alert/error', msg, { root: true });
+            commit('ui/resetIndicator', null, { root: true });
+            commit('auth/loginFail', null, { root: true });
+            commit('alert/error', msg, { root: true });
         })
     },
     fetchCompareDateData({ dispatch, commit, state, rootstate }) {
@@ -611,9 +469,9 @@ const actions = {
                 commit('setComparePeriodCustomer', data.customer);
             }).catch(error => {
                 let msg = errorMessage(error.response.data);
-                // commit('alert/error', msg, { root: true });
-                // commit('ui/resetIndicator', null, { root: true });
-                // commit('auth/loginFail', null, { root: true });
+                commit('alert/error', msg, { root: true });
+                commit('ui/resetIndicator', null, { root: true });
+                commit('auth/loginFail', null, { root: true });
             })
         }
     }

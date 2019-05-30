@@ -148,12 +148,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.abc {
-    text-align: center
-}
-.c-grey-dark {
-    opacity: 0.5;
-}
-</style>

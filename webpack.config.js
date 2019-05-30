@@ -202,6 +202,11 @@ module.exports = env => {
             // ... Vue Loader plugin omitted
             // make sure to include the plugin!
             new VueLoaderPlugin(),
+            new webpack.DefinePlugin({
+                'process.env': {
+                  'API_URL': JSON.stringify(env.api_url)
+                }
+            }),
             // Define useful constants like TNS_WEBPACK
             new webpack.DefinePlugin({
                 "global.TNS_WEBPACK": "true",

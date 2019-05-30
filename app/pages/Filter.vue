@@ -394,8 +394,6 @@ export default {
                 this.committedPerson[propertyName] = +new Date(Number(validatedValue));
                 alert(this.committedPerson[propertyName]);
                 let diff = Number(this.$moment(this.committedPerson.endDate).diff(this.$moment(this.committedPerson.startDate), 'days')) + 1;
-                alert(diff);
-                // let diff = Number(this.$moment.duration(this.committedPerson.endDate - this.committedPerson.startDate).days());
                 this.showCompareDate.date1 = `${this.$moment(this.committedPerson.startDate).subtract(diff, 'd').format('ddd MMM D')} - ${this.$moment(this.committedPerson.startDate).subtract(1, 'd').format('ddd MMM D')}`;
                 this.showCompareDate.date2 = `${this.$moment(this.committedPerson.startDate).subtract(1, 'y').format('ddd MMM D')} - ${this.$moment(this.committedPerson.endDate).subtract(1, 'y').format('ddd MMM D')}`;
                 this.selectedDate.start = +this.committedPerson.startDate;
@@ -423,8 +421,6 @@ export default {
                     this.selectedDate.start = +this.$moment();
                     this.selectedDate.end = +this.$moment();
 
-                    // this.selectedCompareDate.start = +this.$moment().subtract(1, 'd');
-                    // this.selectedCompareDate.end = +this.$moment().subtract(1, 'd');
                     break;
 
                 case 1:
@@ -439,11 +435,6 @@ export default {
                     this.selectedDate.start = +this.$moment().subtract(7, 'd').add(1, 'd');
                     this.selectedDate.end = +this.$moment();
 
-                    // this.selectCompareDate.start = +this.$moment().subtract(14, 'd');
-                    // this.selectCompareDate.end = +this.$moment().subtract(7, 'd').subtract(1, 'd');
-                    // console.log("start", this.selectCompareDate.start);
-                    // console.log("end", this.selectCompareDate.end)
-
                     break;
 
                 case 2:
@@ -457,13 +448,6 @@ export default {
 
                     this.selectedDate.start = +this.$moment().subtract(30, 'd').add(1, 'd');
                     this.selectedDate.end = +this.$moment();
-
-                    // this.selectCompareDate.start = +this.$moment().subtract(60, 'd');
-                    // this.selectCompareDate.end = +this.$moment().subtract(30, 'd').subtract(1, 'd');
-
-                    // console.log("start", this.selectCompareDate.start);
-                    // console.log("end", this.selectCompareDate.end)
-
                     break;
                 case 3:
 
@@ -482,8 +466,6 @@ export default {
 
                     this.selectedCompareDate.start = +this.$moment(this.committedPerson.startDate).subtract(diff, 'd');
                     this.selectedCompareDate.end = +this.$moment(this.committedPerson.startDate).subtract(1, 'd');
-                    // console.log("start", this.selectCompareDate.start);
-                    // console.log("end", this.selectCompareDate.end)
 
             }
         },
@@ -503,7 +485,6 @@ export default {
                         this.selectedCompareDate.end = +this.$moment(this.selectedDate.start).subtract(1, 'd');
                         break;
                     case 3:
-                        // let diff = Number(this.$moment.duration(this.committedPerson.endDate - this.committedPerson.startDate).days());
                         let diff = this.$moment(this.committedPerson.endDate).diff(this.$moment(this.committedPerson.startDate), 'days') + 1;
                         this.selectedCompareDate.start = +this.$moment(this.committedPerson.startDate).subtract(diff, 'd');
                         this.selectedCompareDate.end = +this.$moment(this.committedPerson.startDate).subtract(1, 'd');
@@ -524,7 +505,6 @@ export default {
                         this.selectedCompareDate.end = +this.$moment(this.selectedDate.end).subtract(1, 'y');
                         break;
                     case 3:
-                        // let diff = Number(this.$moment.duration(this.committedPerson.endDate - this.committedPerson.startDate).days());
                         let diff = this.$moment(this.committedPerson.endDate).diff(this.$moment(this.committedPerson.startDate), 'days') + 1;
                         this.selectedCompareDate.start = +this.$moment(this.committedPerson.startDate).subtract(1, 'y');
                         this.selectedCompareDate.end = +this.$moment(this.committedPerson.end).subtract(1, 'y');

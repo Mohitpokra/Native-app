@@ -16,43 +16,43 @@
                 </FlexboxLayout>
             </CardView>
 
-            <Label row="0" class="m-t-15 m-b-5 m-l-15 h2-light" text="Dashboard"></Label>
+            <Label row="0" class="m-t-15 m-b-5 m-l-15 h2-light" text="Dashboard" />
 
-                        <GridLayout row="auto">
-                            <StackLayout row="0">
-                                <HomeRevenue />
-                            </StackLayout>
-                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-                        </GridLayout>
-
-                        <GridLayout row="auto">
-                            <StackLayout row="0">
-                                <HomeOrder />
-                            </StackLayout>
-                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-                        </GridLayout>
-
-                        <GridLayout row="auto">
-                            <StackLayout row="0">
-                                <HomeProduct />
-                            </StackLayout>
-                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-                        </GridLayout>
-
-                        <GridLayout row="auto">
-                            <StackLayout row="0">
-                                <HomeCustomer />
-                            </StackLayout>
-                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-                        </GridLayout>
-
-                        <GridLayout row="auto">
-                            <StackLayout row="0">
-                                <HomeVendor />
-                            </StackLayout>
-                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-                        </GridLayout>
+                <GridLayout row="auto">
+                    <StackLayout row="0">
+                        <HomeRevenue />
                     </StackLayout>
+                    <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                </GridLayout>
+
+                <GridLayout row="auto">
+                    <StackLayout row="0">
+                        <HomeOrder />
+                    </StackLayout>
+                    <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                </GridLayout>
+
+                <GridLayout row="auto">
+                    <StackLayout row="0">
+                        <HomeProduct />
+                    </StackLayout>
+                    <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                </GridLayout>
+
+                <GridLayout row="auto">
+                    <StackLayout row="0">
+                        <HomeCustomer />
+                    </StackLayout>
+                    <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                </GridLayout>
+
+                <GridLayout row="auto">
+                    <StackLayout row="0">
+                        <HomeVendor />
+                    </StackLayout>
+                    <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                </GridLayout>
+        </StackLayout>
     </ScrollView>
 </Page>
 </template>
@@ -329,14 +329,14 @@ export default {
 }
 
 .date-header {
-    font-family: "IBMPlex", "IBMPlexSans", "IBMPlexSans-Regular";
+    font-family: "AvenirNextLTPro";
     font-size: 14;
     font-weight: 900;
     color: #4a4a4a;
 }
 
 .compare-date-header {
-    font-family: "IBMPlex", "IBMPlexSans", "IBMPlexSans-Regular";
+    font-family: "AvenirNextLTPro";
     font-size: 12;
     font-weight: 300;
     color: #4a4a4a;
@@ -349,7 +349,7 @@ export default {
 .card-heading {
     font-size: 16;
     color: #6c798f;
-    font-family: "IBMPlex", "IBMPlexSans", "IBMPlexSans-Regular";
+    font-family: "AvenirNextLTPro";
     font-weight: 900;
 }
 
@@ -358,7 +358,7 @@ export default {
 }
 
 .card-subText {
-    font-family: "IBMPlex", "IBMPlexSans", "IBMPlexSans-Regular";
+    font-family: "AvenirNextLTPro";
     font-size: 8px;
     font-weight: 500;
     color: #b4b4b4;
