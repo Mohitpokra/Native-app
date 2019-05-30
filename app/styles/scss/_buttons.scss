@@ -1,9 +1,11 @@
 .btn {
   color: $btn-color;
   background-color: transparent;
-  min-height: 36;
+  min-height: 50;
   min-width: 64;
   font-weight: 900;
+  border-radius: 4;
+  text-transform: capitalize;
 
   &.btn-active:highlighted {
     color: $white;
@@ -14,6 +16,7 @@
 }
 
 .btn-primary {
+  text-transform: capitalize;
   background-color: $btn-color;
   border-color: $btn-color;
   color: $btn-color-inverse;
@@ -29,7 +32,8 @@
 
   &.btn-white {
     background-color: $white;
-    color: $primary;
+    color: $shakedeal-dark;
+    text-transform: capitalize;
   }
 
   &.btn-blue {
@@ -77,7 +81,7 @@
 
 .btn-outline {
   background-color: transparent;
-  border-width: 1px;
+  border-width: 2px;
   border-color: $btn-color;
   color: $btn-color;
   $btn-padding-y: $btn-padding-y - 8;

@@ -5,25 +5,24 @@
             <GridLayout columns="40%, *" @tap="closeDrawer()">
                 <Label col="1" class="action-bar-title" text="Shakedeal"/>
             </GridLayout>
-            <StackLayout orientation="horizontal" class="m-b-15 m-t-8 p-20 bg-photo-container">
+            <StackLayout orientation="horizontal" class="m-b-15 m-t-8 bg-photo-container">
                 <StackLayout
                   horizontalAlignment="left"
+                  verticalAlignment="center"
                   class="profile-photo-container"
                   width="80"
                   height="80"
                 >
                     <Image
                       class="profile-photo text-center"
-                      width="70"
-                      height="70"
+                      width="42"
+                      height="42"
                       stretch="fill"
                       src="~/images/profile.png"
                     />
                 </StackLayout>
                 <StackLayout class="m-l-15" verticalAlignment="middle">
-                    <Label class="h3 c-white" text="Jason Marz"/>
-                </StackLayout>
-                <StackLayout class="m-l-15" verticalAlignment="middle">
+                    <Label class="h3 c-white" :text="userName"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
@@ -53,7 +52,7 @@
 <script>
 import sideDrawer from "~/mixins/sideDrawer";
 import {
-    Login
+    HomeScreen
 } from '../../router/index'
 import {
     parse
@@ -64,12 +63,17 @@ export default {
         return {
             // define our pages, making sure the component matches that defined in /app/router/index.js
             pages: [{
-                name: "Dashboard",
+                name: "Store Dashboard",
                 component: this.$routes.Home,
                 iconClass: "fas",
                 text: "fa-tachometer-alt"
             }]
         };
+    },
+    computed: {
+        userName () {
+            return this.$store.state.auth.firstName;
+        } 
     },
     methods: {
         goToPage(pageComponent) {
@@ -85,8 +89,11 @@ export default {
         logout() {
             this.closeDrawer();
             this.$store.commit("auth/loginFail");
+            this.$store.commit("ui/resetIndicator");
             this.$store.commit("ui/resetGesturesEnabled");
-            this.$navigateTo(this.$routes.Login);
+            this.$store.commit("dashboard/resetDate");
+            this.$store.commit("dashboard/resetData");
+            this.$navigateTo(this.$routes.HomeScreen);
         }
     }
 };
@@ -116,7 +123,7 @@ export default {
 }
 
 .action-bar-title {
-    margin: 12 15;
+    margin: 12 0;
     font-weight: 500;
     font-size: 18;
     font-family: 'AvenirNextLTPro';
@@ -127,7 +134,6 @@ export default {
     border-width: 1.5;
     border-color: transparent;
     border-radius: 50%;
-    padding: 5;
     box-sizing: border-box;
 }
 

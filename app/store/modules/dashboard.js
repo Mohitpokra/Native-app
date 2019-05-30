@@ -4,6 +4,7 @@ import { fullStatus } from '../../status/common';
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../message.js";
 import axios from '~/axios';
 import Vue from 'nativescript-vue';
+import { stat } from 'fs';
 Vue.use(require('vue-moment'));
 
 const state = {
@@ -11,6 +12,8 @@ const state = {
         date1: +Vue.moment(),
         date2: +Vue.moment()
     },
+    totalRevenue: 0,
+    comparePeriodRevenue: 0,
     isMonthlyFilter: false,
     isWeeklyFilter: false,
     compare: true,
@@ -22,8 +25,11 @@ const state = {
     product: {
         active: 0,
         hidden: 0,
-        disable: 0,
-        categories: 0
+        disable: 0
+        // categories: 0
+    },
+    category: {
+        total: 0
     },
     vendor: {
         active: 0,
@@ -35,14 +41,16 @@ const state = {
         disable: 0,
         hidden: 0,
     },
+    comparePeriodCategory: {
+        total: 0
+    },
     comparePeriodOrder: {
         ...orderStatus
     },
     comparePeriodProduct: {
         active: 0,
         hidden: 0,
-        disable: 0,
-        categories: 0
+        disable: 0
     },
     comparePeriodVendor: {
         active: 0,
@@ -54,12 +62,13 @@ const state = {
         hidden: 0,
         disable: 0,
     },
+    totalCategory: {
+        total: 0
+    },
     totalProduct: {
-        total: 0,
         active: 0,
         hidden: 0,
         disable: 0,
-        categories: 0
     },
     totalVendor: {
         active: 0,
@@ -85,12 +94,17 @@ const state = {
 }
 
 const getters = {
-
 }
 
 
 const mutations = {
 
+    resetDate(state) {
+        state.givenDate.date1 = +Vue.moment();
+        state.givenDate.date2 = +Vue.moment();
+        state.compareDate.date1 = +Vue.moment().subtract(1, 'd');
+        state.compareDate.date2 = +Vue.moment().subtract(1, 'd');
+    },
     setMonthFilter(state, value) {
         state.isMonthlyFilter = value;
     },
@@ -101,7 +115,6 @@ const mutations = {
         state.compare = payload.compare;
     },
     setFilterDate(state, payload) {
-        console.log("I am changign the date", payload);
         state.givenDate.date1 = payload.selectedDate.start;
         state.givenDate.date2 = payload.selectedDate.end;
 
@@ -139,37 +152,57 @@ const mutations = {
         // state.orderPieGraphData = graphData;
         // state.order['total'] = total;
     },
+    setCategory(state, payload) {
+        state.category.total = payload.total;
+    },
     setProduct(state, payload) {
-        state.product.active = payload.active || state.product.active;
-        state.product.hidden = payload.hidden || state.product.hidden;
-        state.product.disable = payload.disable || state.product.disable;
-        state.product.categories = payload.categories || state.product.categories;
-
-        if (!state.product.active && !state.product.hidden && !state.product.disable) {
+        if (payload.length === 0) {
             state.productPieGraphData = [];
             return;
         }
+        let graphData = [];
+        for (let obj of payload) {
+            let key = fullStatus(obj.status);
+            state.product[key] = obj.count || 0;
+        }
+        for (let key in state.product) {
+            let data = {};
+            data.status = key.charAt(0).toUpperCase() + key.slice(1);
+            data.count = Number(state.product[key]);
+            data.title = `${data.status} ${data.count}`;
+            graphData.push(data);
+        }
+        state.productPieGraphData = graphData;
+        // state.product.active = payload.active || state.product.active;
+        // state.product.hidden = payload.hidden || state.product.hidden;
+        // state.product.disable = payload.disable || state.product.disable;
+        // state.product.categories = payload.categories || state.product.categories;
 
-        let graph = [{
-            status: 'Active',
-            count: Number(state.product.active),
-            title: `Active ${Number(state.product.active)}`
+        // if (!state.product.active && !state.product.hidden && !state.product.disable) {
+        //     state.productPieGraphData = [];
+        //     return;
+        // }
 
-        },
-        {
-            status: 'Disable',
-            count: Number(state.product.disable),
-            title: `Disable ${Number(state.product.disable)}`
+        // let graph = [{
+        //     status: 'Active',
+        //     count: Number(state.product.active),
+        //     title: `Active ${Number(state.product.active)}`
 
-        },
-        {
-            status: 'Hidden',
-            count: Number(state.product.hidden),
-            title: `Hidden ${Number(state.product.hidden)}`
+        // },
+        // {
+        //     status: 'Disable',
+        //     count: Number(state.product.disable),
+        //     title: `Disable ${Number(state.product.disable)}`
 
-        }];
+        // },
+        // {
+        //     status: 'Hidden',
+        //     count: Number(state.product.hidden),
+        //     title: `Hidden ${Number(state.product.hidden)}`
 
-        state.productPieGraphData = graph;
+        // }];
+
+        // state.productPieGraphData = graph;
 
     },
     setVendor(sate, payload) {
@@ -214,38 +247,58 @@ const mutations = {
         //     state.customer[key] = obj.count;
         // }
     },
+    setTotalCategory(state, payload) {
+       state.totalCategory.total = payload.total;
+    },
     setTotalProduct(state, payload) {
-        state.totalProduct.total = payload.total || 0;
-        state.totalProduct.active = payload.active || 0;
-        state.totalProduct.hidden = payload.hidden || 0;
-        state.totalProduct.disable = payload.disable || 0;
-        state.totalProduct.categories = payload.categories || 0;
-
-        if (!state.totalProduct.total && !state.totalProduct.active && !state.totalProduct.hidden && !state.totalProduct.disable) {
-            state.totalProductPieGraphData = graph;
+        if (payload.length === 0) {
+            state.totalProductPieGraphData = [];
             return;
         }
+        let graphData = [];
+        for (let obj of payload) {
+            let key = fullStatus(obj.status);
+            state.totalProduct[key] = obj.count || 0;
+        }
+        for (let key in state.totalProduct) {
+            let data = {};
+            data.status = key.charAt(0).toUpperCase() + key.slice(1);
+            data.count = Number(state.totalProduct[key]);
+            data.title = `${data.status} ${data.count}`;
+            graphData.push(data);
+        }
+        state.totalProductPieGraphData = graphData;
+        // state.totalProduct.total = payload.total || 0;
+        // state.totalProduct.active = payload.active || 0;
+        // state.totalProduct.hidden = payload.hidden || 0;
+        // state.totalProduct.disable = payload.disable || 0;
+        // state.totalProduct.categories = payload.categories || 0;
 
-        let graph = [{
-            status: 'Active',
-            count: Number(payload.active),
-            title: `Active ${Number(payload.active)}`
+        // if (!state.totalProduct.total && !state.totalProduct.active && !state.totalProduct.hidden && !state.totalProduct.disable) {
+        //     state.totalProductPieGraphData = graph;
+        //     return;
+        // }
 
-        },
-        {
-            status: 'Disable',
-            count: Number(payload.disable),
-            title: `Disable ${Number(payload.disable)}`
+        // let graph = [{
+        //     status: 'Active',
+        //     count: Number(payload.active),
+        //     title: `Active ${Number(payload.active)}`
 
-        },
-        {
-            status: 'Hidden',
-            count: Number(payload.hidden),
-            title: `Hidden ${Number(payload.hidden)}`
+        // },
+        // {
+        //     status: 'Disable',
+        //     count: Number(payload.disable),
+        //     title: `Disable ${Number(payload.disable)}`
 
-        }];
+        // },
+        // {
+        //     status: 'Hidden',
+        //     count: Number(payload.hidden),
+        //     title: `Hidden ${Number(payload.hidden)}`
 
-        state.totalProductPieGraphData = graph;
+        // }];
+
+        // state.totalProductPieGraphData = graph;
 
     },
     setTotalVendor(state, payload) {
@@ -286,9 +339,16 @@ const mutations = {
         }
         state.totalCustomerPieGraphData = graphData;
     },
-
+    setTotalRevenue(state, payload) {
+        state.totalRevenue = payload.total;
+    },
+    setComparePeriodCategory(state, payload) {
+        state.comparePeriodCategory.total = payload.total;
+    },
+    setComparePeriodRevenue(state, payload) {
+        state.comparePeriodRevenue = payload.total || 0;
+    },
     setCompareOrderStatus(state, payload) {
-
         if (payload.length === 0) {
             state.compareOrderPieGraphData = [];
             return;
@@ -322,37 +382,55 @@ const mutations = {
     },
 
     setComparePeriodProduct(state, payload) {
-        state.comparePeriodProduct.active = payload.active || state.comparePeriodProduct.active;
-        state.comparePeriodProduct.hidden = payload.hidden || state.comparePeriodProduct.hidden;
-        state.comparePeriodProduct.disable = payload.disable || state.comparePeriodProduct.disable;
-        state.comparePeriodProduct.categories = payload.categories || state.comparePeriodProduct.categories;
 
-
-        if (!state.comparePeriodProduct.active && !state.comparePeriodProduct.hidden && !state.comparePeriodProduct.disable) {
-            state.compareProductPieGraphData = graph;
+        if (payload.length === 0) {
+            state.compareProductPieGraphData = [];
             return;
         }
+        let graphData = [];
+        for (let obj of payload) {
+            let key = fullStatus(obj.status);
+            state.comparePeriodProduct[key] = obj.count || 0;
+        }
+        for (let key in state.comparePeriodProduct) {
+            let data = {};
+            data.status = key.charAt(0).toUpperCase() + key.slice(1);
+            data.count = Number(state.comparePeriodProduct[key]);
+            data.title = `${data.status} ${data.count}`;
+            graphData.push(data);
+        }
+        state.compareProductPieGraphData = graphData;
+        // state.comparePeriodProduct.active = payload.active || state.comparePeriodProduct.active;
+        // state.comparePeriodProduct.hidden = payload.hidden || state.comparePeriodProduct.hidden;
+        // state.comparePeriodProduct.disable = payload.disable || state.comparePeriodProduct.disable;
+        // state.comparePeriodProduct.categories = payload.categories || state.comparePeriodProduct.categories;
 
-        let graph = [{
-            status: 'Active',
-            count: Number(state.comparePeriodProduct.active),
-            title: `Active ${Number(state.comparePeriodProduct.active)}`
 
-        },
-        {
-            status: 'Disable',
-            count: Number(state.comparePeriodProduct.disable),
-            title: `Disable ${Number(state.comparePeriodProduct.disable)}`
+        // if (!state.comparePeriodProduct.active && !state.comparePeriodProduct.hidden && !state.comparePeriodProduct.disable) {
+        //     state.compareProductPieGraphData = graph;
+        //     return;
+        // }
 
-        },
-        {
-            status: 'Hidden',
-            count: Number(state.comparePeriodProduct.hidden),
-            title: `Hidden ${Number(state.comparePeriodProduct.hidden)}`
+        // let graph = [{
+        //     status: 'Active',
+        //     count: Number(state.comparePeriodProduct.active),
+        //     title: `Active ${Number(state.comparePeriodProduct.active)}`
 
-        }];
+        // },
+        // {
+        //     status: 'Disable',
+        //     count: Number(state.comparePeriodProduct.disable),
+        //     title: `Disable ${Number(state.comparePeriodProduct.disable)}`
 
-        state.compareProductPieGraphData = graph;
+        // },
+        // {
+        //     status: 'Hidden',
+        //     count: Number(state.comparePeriodProduct.hidden),
+        //     title: `Hidden ${Number(state.comparePeriodProduct.hidden)}`
+
+        // }];
+
+        // state.compareProductPieGraphData = graph;
 
     },
     setComparePeriodCustomer(state, payload) {
@@ -400,14 +478,16 @@ const mutations = {
         state.compareVendorPieGraphData = graphData;
     },
     resetData(state) {
-
         state.order = { ...orderStatus },
         state.product = resetproperties();
+        state.category.total = 0;
         state.customer = resetproperties();
         state.vendor = resetproperties();
+        state.totalCategory.total = 0;
         state.totalCustomer = resetproperties();
         state.totalProduct = resetproperties();
         state.totalVendor = resetproperties();
+        state.comparePeriodCategory.total = 0;
         state.comparePeriodOrder = { ...orderStatus };
         state.comparePeriodProduct = resetproperties();
         state.comparePeriodCustomer = resetproperties();
@@ -502,19 +582,21 @@ const actions = {
         commit('resetData');
         await axios.get("/api/v1/graphs/data_points", { params: state.givenDate }).then(resp => {
             let data = resp.data;
-            console.log("******************", data);
             commit('setOrderStatus', data.order);
-            commit('setProduct', data.product[0]);
+            commit('setProduct', data.product);
             commit('setVendor', data.vendor);
+            commit('setCategory', data.categories[0]);
             commit('setCustomer', data.customer);
-            commit('setTotalProduct', data.totalProduct[0]);
+            commit('setTotalRevenue', data.totalRevenue[0]);
+            commit('setTotalCategory', data.totalCategories[0]);
+            commit('setTotalProduct', data.totalProduct);
             commit('setTotalVendor', data.totalVendor);
             commit('setTotalCustomer', data.totalCustomer);
         }).catch(err => {
             let msg = errorMessage(error.response.data);
-            commit('ui/resetIndicator', null, { root: true });
-            commit('auth/loginFail', null, { root: true });
-            commit('alert/error', msg, { root: true });
+            // commit('ui/resetIndicator', null, { root: true });
+            // commit('auth/loginFail', null, { root: true });
+            // commit('alert/error', msg, { root: true });
         })
     },
     fetchCompareDateData({ dispatch, commit, state, rootstate }) {
@@ -522,14 +604,16 @@ const actions = {
             axios.get("/api/v1/graphs/compare/data_points").then(resp => {
                 let data = resp.data;
                 commit('setCompareOrderStatus', data.order);
-                commit('setComparePeriodProduct', data.product[0]);
+                commit('setComparePeriodRevenue', data.totalRevenue[0]);
+                commit('setComparePeriodCategory', data.categories[0])
+                commit('setComparePeriodProduct', data.product);
                 commit('setComparePeriodVendor', data.vendor);
                 commit('setComparePeriodCustomer', data.customer);
             }).catch(error => {
                 let msg = errorMessage(error.response.data);
-                commit('alert/error', msg, { root: true });
-                commit('ui/resetIndicator', null, { root: true });
-                commit('auth/loginFail', null, { root: true });
+                // commit('alert/error', msg, { root: true });
+                // commit('ui/resetIndicator', null, { root: true });
+                // commit('auth/loginFail', null, { root: true });
             })
         }
     }

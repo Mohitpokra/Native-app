@@ -2,12 +2,12 @@
 <Page backgroundColor="#d7dfec">
     <ActionBar class="action-bar">
         <GridLayout class="m-x-15" width="100%" columns="auto, auto, *" rows="*">
-            <Label class="fas vertical-middle t-30" :text="`fa-long-arrow-alt-left` | fonticon" col="0"  @tap="$navigateBack"/>
-            <Label class="action-bar-title m-l-20" text="Date Range Selector"  col="1"/>
+            <Label class="fas vertical-middle t-30 m-r-10" :text="`fa-long-arrow-alt-left` | fonticon" col="0"  @tap="$navigateBack"/>
+            <Label class="action-bar-title" text="Date Range Selector"  col="1"/>
             <Label class="h3 c-white m-t-12" text="SAVE"  horizontalAlignment="right" col="2"  @tap="apply"/>
         </GridLayout>
     </ActionBar>
-    <TabView tabBackgroundColor="#be8600" selectedColor="#be8600" androidSelectedTabHighlightColor="#ffffff" selectedTabTextColor="#ffffff" @selectedIndexChange="tabChange">
+    <TabView tabBackgroundColor="#957f48"  tabTextColor="#e2cb95" androidSelectedTabHighlightColor="rgba(255, 255, 255, 0.38)" selectedTabTextColor="#ffffff" @selectedIndexChange="tabChange">
         <TabViewItem title="DAY" class="h4">
             <ScrollView>
                 <StackLayout>
@@ -36,7 +36,7 @@
                             <StackLayout class="boring p-card">
                                 <GridLayout class="m-b-12" rows="auto" columns="*">
                                     <Label class="h4-filter-block m-l-10" horizontalAlignment="left" text="Compare"/>
-                                    <Switch  color="#be8600" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
+                                    <Switch  color="#957f48" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
                                 </GridLayout>
                                 <StackLayout v-show="comapreBlock" orientation="horizontal">
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare1" :text="`fa-circle` | fonticon"  @tap="compareCheckBox1"/>
@@ -96,13 +96,13 @@
                             <StackLayout class="boring p-card">
                                 <GridLayout class="m-b-12" rows="auto" columns="*">
                                     <Label class="h4-filter-block m-l-10" horizontalAlignment="left" text="Compare"/>
-                                    <Switch :checked="comapreBlock" color="#be8600" backgroundColor="#404553" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
+                                    <Switch :checked="comapreBlock" color="#957f48" backgroundColor="#404553" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
                                 </GridLayout>
                                 <StackLayout v-show="comapreBlock" orientation="horizontal">
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare1" :text="`fa-circle` | fonticon"  @tap="compareCheckBox1"/>
                                     <Label class="fa  p-2 t-20 fa-lg c-primary m-r-5" v-show="cbCompare1" :text="`fa-dot-circle` | fonticon" @tap="compareCheckBox1"/>
                                     <StackLayout>
-                                        <Label class="h4-filter-block" text="Previous Week"/>
+                                        <Label class="h4-filter-block" text="Previous Period"/>
                                         <Label class="h6 p-t-2" :text="showCompareDate.date1"/>
                                     </StackLayout>
                                 </StackLayout>
@@ -110,7 +110,7 @@
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare2" :text="`fa-circle` | fonticon"  @tap="compareCheckBox2"/>
                                     <Label class="fa  p-2 t-20 fa-lg c-primary m-r-5" v-show="cbCompare2" :text="`fa-dot-circle` | fonticon" @tap="compareCheckBox2"/>
                                     <StackLayout>
-                                        <Label class="h4-filter-block" text="Same Period last year"/>
+                                        <Label class="h4-filter-block" text="Same period last year"/>
                                         <Label class="h6  p-t-2" :text="showCompareDate.date2"/>
                                     </StackLayout>
                                 </StackLayout>
@@ -159,13 +159,13 @@
                             <StackLayout class="boring p-card">
                                 <GridLayout class="m-b-12" rows="auto" columns="*">
                                     <Label class="h4-filter-block m-l-10" horizontalAlignment="left" text="Compare"/>
-                                    <Switch color="#be8600" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
+                                    <Switch color="#957f48" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
                                 </GridLayout>
                                 <StackLayout v-show="comapreBlock" orientation="horizontal">
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare1" :text="`fa-circle` | fonticon"  @tap="compareCheckBox1"/>
                                         <Label class="fa  p-2 t-20 fa-lg c-primary m-r-5" v-show="cbCompare1" :text="`fa-dot-circle` | fonticon" @tap="compareCheckBox1"/>
                                         <StackLayout>
-                                            <Label class="h4-filter-block" text="Previous Month"/>
+                                            <Label class="h4-filter-block" text="Previous Period"/>
                                             <Label class="h6 p-t-2" :text="showCompareDate.date1"/>
                                         </StackLayout>
                                 </StackLayout>
@@ -173,7 +173,7 @@
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare2" :text="`fa-circle` | fonticon"  @tap="compareCheckBox2"/>
                                     <Label class="fa  p-2 t-20 fa-lg c-primary m-r-5" v-show="cbCompare2" :text="`fa-dot-circle` | fonticon" @tap="compareCheckBox2"/>
                                     <StackLayout>
-                                        <Label class="h4-filter-block" text="Same Period last year"/>
+                                        <Label class="h4-filter-block" text="Same period last year"/>
                                         <Label class="h6  p-t-2" :text="showCompareDate.date2"/>
                                     </StackLayout>
                                 </StackLayout>
@@ -208,7 +208,7 @@
                             <StackLayout class="boring p-card">
                                 <GridLayout class="m-b-12" rows="auto" columns="*">
                                     <Label class="h4-filter-block m-l-10" horizontalAlignment="left" text="Compare"/>
-                                    <Switch color="#be8600" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
+                                    <Switch color="#957f48" backgroundColor="#404553" :checked="comapreBlock" horizontalAlignment="right" @checkedChange="comapreBlock = $event.value" />
                                 </GridLayout>
                                 <StackLayout v-show="comapreBlock" orientation="horizontal">
                                     <Label class="fa  p-2 t-20 fa-lg m-r-5" v-show="!cbCompare1" :text="`fa-circle` | fonticon"  @tap="compareCheckBox1"/>

@@ -7,27 +7,27 @@
             <ScrollView orientation="horizontal">
                 <StackLayout orientation="horizontal">
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
-                        <Label class="m-10 h4-card-block"  text="Total Customers"/>
+                        <Label class="m-10 h4-card-block"  text="Total customers"/>
                         <Label class="card-number text-left" v-if="this.tillTotalVednor" :text="this.stringFormat(this.tillTotalVednor)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
-                        <Label class="m-10 h4-card-block"  text="Total Active customers"/>
+                        <Label class="m-10 h4-card-block"  text="Total active customers"/>
                         <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.active" :text="this.stringFormat(this.totalCustomerDataPoints.active)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" flexDirection="column" align-items="flex-start">
-                        <Label class="m-10 h4-card-block"  text="Total Disable customers"/>
+                        <Label class="m-10 h4-card-block"  text="Total disable customers"/>
                         <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.disable" :text="this.stringFormat(this.totalCustomerDataPoints.disable)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
-                        <Label class="m-10 h4-card-block"  text="Total Hidden customers"/>
+                        <Label class="m-10 h4-card-block"  text="Total hidden customers"/>
                         <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.hidden" :text="this.stringFormat(this.totalCustomerDataPoints.hidden)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
-                        <Label class="m-10 h4-card-block"  text="Total Unknown customers"/>
+                        <Label class="m-10 h4-card-block"  text="Total unknown customers"/>
                         <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.unknown" :text="this.stringFormat(this.totalCustomerDataPoints.unknown)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
@@ -61,47 +61,50 @@
             <Gridlayout rows="auto">
                 <Carousel class="m-l-10" height="320" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColorUnselected="#404553" indicatorColor="#007afc" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
                     <CarouselItem id="slide1" verticalAlignment="middle">
-                        <Label class="h4-card-block m-10 text-left"  text="Total customer by Status"/>
-                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.totalCustomerPieGraphData.length)" height="300" allowAnimation="true" row="0">
+                        <Label class="h4-card-block m-10 text-left"  text="Total customer by status"/>
+                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.totalCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
                             <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.totalCustomerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
-                        <FlexboxLayout v-else justifyContent="center" height="300">
+                        <FlexboxLayout v-else justifyContent="center" height="200">
                             <FlexboxLayout flexDirection="column" justifyContent="center">
-                                <Label class="c-danger" text="No data Found" />
+                                <Image src="~/images/no_data.png" height="36" width="36" stretch="aspectFit" />
+                                <Label class="c-grey-dark h4 m-t-5" text="No data Found" />
                             </FlexboxLayout>
                         </FlexboxLayout>
                     </CarouselItem>
                     <CarouselItem  id="slide2" verticalAlignment="middle">
-                        <Label class="h4-card-block m-10 text-left" text="customer by Status"/>
+                        <Label class="h4-card-block m-10 text-left" text="Given period customer by status"/>
 
-                        <RadPieChart v-if="this.customerPieGraphData && Boolean(this.customerPieGraphData.length)" height="300" allowAnimation="true" row="0">
+                        <RadPieChart v-if="this.customerPieGraphData && Boolean(this.customerPieGraphData.length)" height="200" allowAnimation="true" row="0">
                             <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.customerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
 
-                        <FlexboxLayout v-else justifyContent="center" height="300">
+                        <FlexboxLayout v-else justifyContent="center" height="200">
                             <FlexboxLayout flexDirection="column" justifyContent="center">
-                                <Label class="c-danger" text="No data Found" />
+                                <Image src="~/images/no_data.png" height="36" width="36" stretch="aspectFit" />
+                                <Label class="c-grey-dark h4 m-t-5" text="No data Found" />
                             </FlexboxLayout>
                         </FlexboxLayout>
 
                     </CarouselItem>
                     <CarouselItem id="slide3" verticalAlignment="middle">
-                        <Label class="h4-card-block m-10 text-left"  text="Compare Period customer by Status"/>
-                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.compareCustomerPieGraphData.length)" height="300" allowAnimation="true" row="0">
+                        <Label class="h4-card-block m-10 text-left"  text="Compare period customer by status"/>
+                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.compareCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
                             <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.compareCustomerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
-                        <FlexboxLayout v-else justifyContent="center" height="300">
+                        <FlexboxLayout v-else justifyContent="center" height="200">
                             <FlexboxLayout flexDirection="column" justifyContent="center">
-                                <Label class="c-danger" text="No data Found" />
+                                <Image src="~/images/no_data.png" height="36" width="36" stretch="aspectFit" />
+                                <Label class="c-grey-dark h4 m-t-5" text="No data Found" />
                             </FlexboxLayout>
                         </FlexboxLayout>
                     </CarouselItem>

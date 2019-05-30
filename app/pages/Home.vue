@@ -18,34 +18,41 @@
 
             <Label row="0" class="m-t-15 m-b-5 m-l-15 h2-light" text="Dashboard"></Label>
 
-            <GridLayout row="auto">
-                <StackLayout row="0">
-                    <HomeOrder />
-                </StackLayout>
-                <ActivityIndicator color="#be8600" rowSpan="1" class="p-10" backgroundColor="rgba(0, 0, 0, 0.4)" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-            </GridLayout>
+                        <GridLayout row="auto">
+                            <StackLayout row="0">
+                                <HomeRevenue />
+                            </StackLayout>
+                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                        </GridLayout>
 
-            <GridLayout row="auto">
-                <StackLayout row="0">
-                    <HomeProduct />
-                </StackLayout>
-                <ActivityIndicator color="#be8600" rowSpan="1" class="p-10" backgroundColor="rgba(0, 0, 0, 0.4)" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-            </GridLayout>
+                        <GridLayout row="auto">
+                            <StackLayout row="0">
+                                <HomeOrder />
+                            </StackLayout>
+                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" x borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                        </GridLayout>
 
-            <GridLayout row="auto">
-                <StackLayout row="0">
-                    <HomeCustomer />
-                </StackLayout>
-                <ActivityIndicator color="#be8600" rowSpan="1" class="p-10" backgroundColor="rgba(0, 0, 0, 0.4)" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-            </GridLayout>
+                        <GridLayout row="auto">
+                            <StackLayout row="0">
+                                <HomeProduct />
+                            </StackLayout>
+                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                        </GridLayout>
 
-            <GridLayout row="auto">
-                <StackLayout row="0">
-                    <HomeVendor />
-                </StackLayout>
-                <ActivityIndicator color="#be8600" rowSpan="1" class="p-10" backgroundColor="rgba(0, 0, 0, 0.4)" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
-            </GridLayout>
-        </StackLayout>
+                        <GridLayout row="auto">
+                            <StackLayout row="0">
+                                <HomeCustomer />
+                            </StackLayout>
+                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                        </GridLayout>
+
+                        <GridLayout row="auto">
+                            <StackLayout row="0">
+                                <HomeVendor />
+                            </StackLayout>
+                            <ActivityIndicator color="#957f48" rowSpan="1" class="p-10" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true"></ActivityIndicator>
+                        </GridLayout>
+                    </StackLayout>
     </ScrollView>
 </Page>
 </template>
@@ -55,6 +62,7 @@ import HomeOrder from '../components/graphs/HomeOrder.vue';
 import HomeProduct from '../components/graphs/HomeProduct.vue';
 import HomeVendor from '../components/graphs/HomeVendor.vue';
 import HomeCustomer from '../components/graphs/HomeCustomer.vue';
+import HomeRevenue from '../components/graphs/HomeRevenue.vue'
 import Login from './Login';
 import sideDrawer from "~/mixins/sideDrawer";
 import TopActionBar from "~/components/layout/TopActionBar.vue";
@@ -84,7 +92,8 @@ export default {
         HomeOrder,
         HomeProduct,
         HomeVendor,
-        HomeCustomer
+        HomeCustomer,
+        HomeRevenue
     },
     data() {
         return {
@@ -114,9 +123,20 @@ export default {
             return this.$store.state.dashboard.compare;
         },
         isAuthenticate() {
-            if (!this.$store.state.isAuthenticate) {
+            if (this.$store.state.isAuthenticate == false) {
                 alert("Your token has been expired, Please login again");
-                this.$navigateTo(Login);
+                this.$store.commit("auth/loginFail");
+                this.$store.commit("ui/resetIndicator");
+                this.$store.commit("ui/resetGesturesEnabled");
+                this.$store.comiit("dashboard/resetData");
+                this.$store.commit("dashboard/resetDate");
+                this.$navigateTo(Login, {
+                    transition: {
+                        name: "slideTop",
+                        curve: "easeIn",
+                        duration: 1000
+                    }
+                });
             }
             return this.$store.state.auth.isAuthenticate;
         }
@@ -158,7 +178,7 @@ export default {
                 //Condtion when monthly filter (only when this month and previous month condition is on) is active
                 payload.selectedDate.start = +this.$moment(Number((this.$store.state.dashboard.givenDate.date1))).subtract(1, 'M');
                 payload.selectedDate.end = +this.$moment(Number((this.$store.state.dashboard.givenDate.date1))).subtract(1, 'd');
-                
+
                 //Condition when user will search data beyond current date.
                 if (payload.selectedDate.end > +this.$moment() && payload.selectedDate.start < +this.$moment()) {
                     payload.selectedDate.end = +this.$moment();
@@ -206,6 +226,7 @@ export default {
 
             // commit and fetch data for selected period
             this.$store.commit('dashboard/setFilterDate', payload);
+            this.$store.commit('dashboard/resetData');
             this.$store.commit('ui/setIndicator');
             this.$store.dispatch("dashboard/fetchGivenDateData").then(resp => {
                 this.$store.dispatch("dashboard/fetchCompareDateData").then(resp => {
@@ -289,7 +310,13 @@ export default {
             this.$store.commit("ui/changeIndicator");
         },
         goToFilter() {
-            this.$navigateTo(this.$routes.Filter);
+            this.$navigateTo(this.$routes.Filter, {
+                transition: {
+                    name: "slideLeft",
+                    curve: "linear",
+                    duration: 600
+                }
+            });
         }
     }
 };

@@ -1,21 +1,14 @@
 <template lang="html">
 <Page actionBarHidden="true" backgroundColor="#d7dfec">
     <DockLayout stretchLastChild="true" class="bg-image">
-        <Label dock="left" width="10%"/>
+            <Label dock="left" width="5%"/>
             <Label dock="top" height="50%"/>
-            <Label dock="right" width="10%"/>
+            <Label dock="right" width="5%"/>
             <StackLayout dock="center" height="50%">
             <StackLayout orientation="horizontal" verticalAlignment="center">
-                <StackLayout class="m-20" verticalAlignment="center" orientation="horizontal">
-                    <Image height="60" width="100" src="~/images/logo.png" />
-                        <StackLayout verticalAlignment="center" orientation="vertical">
-                        <Label class="h1 c-white" text="Shakedeal" />
-                        <Label class="h6 c-l-white" text="Dashboard v1.0" />
-                    </StackLayout>
-                </StackLayout>
             </StackLayout>
             <StackLayout class="margin">
-                <Button class="btn btn-outline outline-white" text="Existing User Login here" @tap="goToLogin"/>
+                <Button class="btn btn-primary h3 w-500 c-white" text="Existing User Login here" @tap="goToLogin"/>
             </StackLayout>
             </StackLayout>
         </DockLayout>       
@@ -34,7 +27,13 @@ export default {
     computed: {},
     methods: {
         goToLogin() {
-            this.$navigateTo(Login);
+            this.$navigateTo(Login, {
+                    transition: {
+                        name: "slideLeft",
+                        curve: "easeIn",
+                        duration: 1000
+                    }
+            });
         }
     }
 };
@@ -46,11 +45,12 @@ export default {
 }
 
 .bg-image {
-    background-image: url("~/images/home.jpg");
+    background-image: url("res://home");
+     background-position: center; 
 }
 
 .margin {
-    margin-top: 40;
+    margin-top: 110;
 }
 
 .c-l-white {

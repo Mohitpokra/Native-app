@@ -55,32 +55,34 @@
             <Gridlayout rows="auto">
                 <Carousel class="m-l-10" height="320" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColorUnselected="#404553" indicatorColor="#007afc" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
                     <CarouselItem id="slide1" verticalAlignment="middle">
-                        <Label class="h4-card-block m-10 text-left" text="Order by Status"/>
+                        <Label class="h4-card-block m-10 text-left" text="Given Period order by status"/>
 
-                        <RadPieChart v-if="this.orderPieGraphData && Boolean(this.orderPieGraphData.length)" height="300" allowAnimation="true" row="0">
+                        <RadPieChart v-if="this.orderPieGraphData && Boolean(this.orderPieGraphData.length)" height="200" allowAnimation="true" row="0">
                             <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.orderPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="order" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
-                        <FlexboxLayout v-else justifyContent="center" height="300">
+                        <FlexboxLayout v-else justifyContent="center" height="200">
                             <FlexboxLayout flexDirection="column" justifyContent="center">
-                                <Label class="c-danger" text="No data Found" />
+                                <Image src="~/images/no_data.png" height="36" width="36" stretch="aspectFit" />
+                                <Label class="c-grey-dark h4 m-t-5" text="No data Found" />
                         </FlexboxLayout>
                         </FlexboxLayout>
                     </CarouselItem>
 
                     <CarouselItem id="slide2" verticalAlignm\ent="middle">
-                        <Label class="h4-card-block m-10 text-left"  text="Compare Period order by Status"/>
-                        <RadPieChart v-if="this.compareOrderPieGraphData && Boolean(this.compareOrderPieGraphData.length)" height="300" allowAnimation="true" row="0">
+                        <Label class="h4-card-block m-10 text-left"  text="Compare period order by status"/>
+                        <RadPieChart v-if="this.compareOrderPieGraphData && Boolean(this.compareOrderPieGraphData.length)" height="200" allowAnimation="true" row="0">
                             <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.compareOrderPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="order" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
                         </RadPieChart>
-                        <FlexboxLayout v-else justifyContent="center" height="300">
+                        <FlexboxLayout v-else justifyContent="center" height="200">
                             <FlexboxLayout flexDirection="column" justifyContent="center">
-                                <Label class="c-danger" text="No data Found" />
+                                <Image src="~/images/no_data.png" height="36" width="36" stretch="aspectFit" />
+                                <Label class="c-grey-dark h4 m-t-5" text="No data Found" />
                             </FlexboxLayout>
                         </FlexboxLayout>
                     </CarouselItem>
@@ -150,5 +152,8 @@ export default {
 <style>
 .abc {
     text-align: center
+}
+.c-grey-dark {
+    opacity: 0.5;
 }
 </style>

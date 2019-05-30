@@ -1,26 +1,26 @@
 <template lang="html">
 <Page backgroundColor="#d7dfec">
     <ActionBar class="action-bar">
-        <GridLayout width="100%" columns="auto, *" rows="*">
-            <Label class="action-bar-title m-l-20" text="Login"  col="1"></Label>
+        <GridLayout class="p-l-10" width="100%" columns="auto, *" rows="*">
+            <Label class="action-bar-title" text="Login"  col="1"></Label>
         </GridLayout>
     </ActionBar>
     <ScrollView>
-        <CardView class="m-10">
+        <CardView class="m-15">
             <GridLayout row="auto auto">
                 <StackLayout row="0">
-                    <StackLayout class="m-t-17 text-center">
-                        <Label class="m-15 card-text" textWrap="true" text="If you’re an existing user please login to access the dashboard."></Label>
-                        <Image horizontalAlignment="center" stretch="none" src="~/images/login.png" />>
+                    <StackLayout class="m-t-30 text-center">
+                        <Label class="m-15 card-text l-h" textWrap="true" text="If you’re an existing user please login to access the dashboard."></Label>
+                        <Image horizontalAlignment="center" height="100" width="100"  src="~/images/login.png" />>
                     </StackLayout>
-                    <StackLayout>
+                    <StackLayout class="m-t-15">
                         <RadDataForm class="m-t-30" :source="person" :metadata="personMetadata" @propertyValidated="onPropertyValidated" />
                     </StackLayout>
                     <StackLayout>
                         <Button class="btn btn-primary" text="Login" @tap="login"></Button>
                     </StackLayout>
                 </StackLayout>
-                <ActivityIndicator class="p-10" color="#be8600" backgroundColor="rgba(0, 0, 0, 0.4)" borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="100" width="100" busy="true" rowSpan="2"></ActivityIndicator>
+                <ActivityIndicator class="p-10" color="#957f48"  borderRadius="50%" :visibility="activityIndicator ? 'visible' : 'collapsed'" height="50" width="50" busy="true" rowSpan="2"></ActivityIndicator>
             </GridLayout>
         </CardView>
     </ScrollView>
@@ -165,7 +165,9 @@ export default {
                 this.$store.commit("ui/setIndicator");
                 this.$store.dispatch("auth/login", formData).then(resp => {
                     if (this.isAuthenticate) {
-                        this.$navigateTo(Home);
+                        this.$navigateTo(Home, {
+                            clearHistory: true
+                        });
                     }
                 });
             } else if (!formData.password && !formData.email) {
@@ -204,5 +206,9 @@ export default {
 
 .f-dark {
     font-weight: 900;
+}
+
+.l-h {
+    line-height: 10;
 }
 </style>
