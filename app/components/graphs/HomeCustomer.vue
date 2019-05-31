@@ -8,27 +8,27 @@
                 <StackLayout orientation="horizontal">
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total customers"/>
-                        <Label class="card-number text-left" v-if="this.tillTotalVednor" :text="this.stringFormat(this.tillTotalVednor)"/>
+                        <Label class="card-number text-left" v-if="tillTotalVednor" :text="stringFormat(tillTotalVednor)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total active customers"/>
-                        <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.active" :text="this.stringFormat(this.totalCustomerDataPoints.active)"/>
+                        <Label class="card-number text-left" v-if="totalCustomerDataPoints && totalCustomerDataPoints.active" :text="stringFormat(totalCustomerDataPoints.active)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total disable customers"/>
-                        <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.disable" :text="this.stringFormat(this.totalCustomerDataPoints.disable)"/>
+                        <Label class="card-number text-left" v-if="totalCustomerDataPoints && totalCustomerDataPoints.disable" :text="stringFormat(totalCustomerDataPoints.disable)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total hidden customers"/>
-                        <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.hidden" :text="this.stringFormat(this.totalCustomerDataPoints.hidden)"/>
+                        <Label class="card-number text-left" v-if="totalCustomerDataPoints && totalCustomerDataPoints.hidden" :text="stringFormat(totalCustomerDataPoints.hidden)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total unknown customers"/>
-                        <Label class="card-number text-left" v-if="this.totalCustomerDataPoints && this.totalCustomerDataPoints.unknown" :text="this.stringFormat(this.totalCustomerDataPoints.unknown)"/>
+                        <Label class="card-number text-left" v-if="totalCustomerDataPoints && totalCustomerDataPoints.unknown" :text="stringFormat(totalCustomerDataPoints.unknown)"/>
                         <Label class="card-number text-left" v-else text="0"/>
                     </FlexboxLayout>
                 </StackLayout>
@@ -37,24 +37,24 @@
                 <StackLayout class="m-t-10" orientation="horizontal">
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Active customers"/>
-                        <Label class="card-number text-left" v-if="this.customer && this.customer.active" :text="this.stringFormat(this.customer.active)"/>
+                        <Label class="card-number text-left" v-if="customer && customer.active" :text="stringFormat(customer.active)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" v-if="diffActivecustomer > 0" width="50%" :text=" '+' + this.stringFormat(this.diffActivecustomer) + ' customers'"/>
-                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffActivecustomer < 0" width="50%" :text="this.stringFormat(this.diffActivecustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-success-text" v-if="diffActivecustomer > 0" width="50%" :text=" '+' + stringFormat(diffActivecustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffActivecustomer < 0" width="50%" :text="stringFormat(diffActivecustomer) + ' customers'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Disable customers"/>
-                        <Label class="card-number text-left" v-if="this.customer && this.customer.disable" :text="this.stringFormat(this.customer.disable)"/>
+                        <Label class="card-number text-left" v-if="customer && customer.disable" :text="stringFormat(customer.disable)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" v-if="this.diffDisablecustomer > 0"  width="50%" :text="'+' + this.stringFormat(this.diffDisablecustomer) + ' customers'"/>
-                        <Label class="m-10 h4-card-block c-danger" v-else-if="this.diffDisablecustomer < 0" width="50%" :text="this.stringFormat(this.diffDisablecustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-success-text" v-if="diffDisablecustomer > 0"  width="50%" :text="'+' + stringFormat(diffDisablecustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffDisablecustomer < 0" width="50%" :text="stringFormat(diffDisablecustomer) + ' customers'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Hidden customers"/>
-                        <Label class="card-number text-left" v-if="this.customer && this.customer.hidden" :text="this.stringFormat(this.customer.hidden)"/>
+                        <Label class="card-number text-left" v-if="customer && customer.hidden" :text="stringFormat(customer.hidden)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffHiddencustomer > 0" :text="'+' + this.stringFormat(this.diffHiddencustomer) + ' customers'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffHiddencustomer < 0" :text="this.stringFormat(this.diffHiddencustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffHiddencustomer > 0" :text="'+' + stringFormat(diffHiddencustomer) + ' customers'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffHiddencustomer < 0" :text="stringFormat(diffHiddencustomer) + ' customers'"/>
                     </FlexboxLayout>
                 </StackLayout>
             </ScrollView>
@@ -62,8 +62,8 @@
                 <Carousel class="m-l-10" height="320" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColorUnselected="#404553" indicatorColor="#007afc" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
                     <CarouselItem id="slide1" verticalAlignment="middle">
                         <Label class="h4-card-block m-10 text-left"  text="Total customer by status"/>
-                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.totalCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.totalCustomerPieGraphData">
+                        <RadPieChart v-if="totalCustomerPieGraphData && Boolean(totalCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="totalCustomerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
@@ -78,8 +78,8 @@
                     <CarouselItem  id="slide2" verticalAlignment="middle">
                         <Label class="h4-card-block m-10 text-left" text="Given period customer by status"/>
 
-                        <RadPieChart v-if="this.customerPieGraphData && Boolean(this.customerPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.customerPieGraphData">
+                        <RadPieChart v-if="customerPieGraphData && Boolean(customerPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="customerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
@@ -95,8 +95,8 @@
                     </CarouselItem>
                     <CarouselItem id="slide3" verticalAlignment="middle">
                         <Label class="h4-card-block m-10 text-left"  text="Compare period customer by status"/>
-                        <RadPieChart v-if="this.totalCustomerPieGraphData && Boolean(this.compareCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.compareCustomerPieGraphData">
+                        <RadPieChart v-if="totalCustomerPieGraphData && Boolean(compareCustomerPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="compareCustomerPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="customer" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>

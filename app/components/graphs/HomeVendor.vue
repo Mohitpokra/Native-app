@@ -8,22 +8,22 @@
             <StackLayout orientation="horizontal">
                 <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Total vendors"/>
-                    <Label class="card-number text-left" v-if="this.tillTotalVednor" :text="this.stringFormat(this.tillTotalVednor)"/>
+                    <Label class="card-number text-left" v-if="tillTotalVednor" :text="stringFormat(tillTotalVednor)"/>
                     <Label class="card-number text-left" v-else text="0"/>
                 </FlexboxLayout>
                 <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Total active vendors"/>
-                    <Label class="card-number text-left" v-if="this.totalVendorDataPoints && this.totalVendorDataPoints.active" :text="this.stringFormat(this.totalVendorDataPoints.active)"/>
+                    <Label class="card-number text-left" v-if="totalVendorDataPoints && totalVendorDataPoints.active" :text="stringFormat(totalVendorDataPoints.active)"/>
                     <Label class="card-number text-left" v-else text="0"/>
                 </FlexboxLayout>
                 <FlexboxLayout width="170" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Total disable vendors"/>
-                    <Label class="card-number text-left" v-if="this.totalVendorDataPoints && this.totalVendorDataPoints.disable" :text="this.stringFormat(this.totalVendorDataPoints.disable)"/>
+                    <Label class="card-number text-left" v-if="totalVendorDataPoints && totalVendorDataPoints.disable" :text="stringFormat(totalVendorDataPoints.disable)"/>
                     <Label class="card-number text-left" v-else text="0"/>
                 </FlexboxLayout>
                 <FlexboxLayout width="170" class="card-bg" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Total hidden vendors"/>
-                    <Label class="card-number text-left" v-if="this.totalVendorDataPoints && this.totalVendorDataPoints.hidden" :text="this.stringFormat(this.totalVendorDataPoints.hidden)"/>
+                    <Label class="card-number text-left" v-if="totalVendorDataPoints && totalVendorDataPoints.hidden" :text="stringFormat(totalVendorDataPoints.hidden)"/>
                     <Label class="card-number text-left" v-else text="0"/>
                 </FlexboxLayout>
             </StackLayout>
@@ -32,24 +32,24 @@
             <StackLayout class="m-t-10" orientation="horizontal">
                 <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Active vendors"/>
-                    <Label class="card-number text-left" v-if="this.vendor && this.vendor.active" :text="this.stringFormat(this.vendor.active)"/>
+                    <Label class="card-number text-left" v-if="vendor && vendor.active" :text="stringFormat(vendor.active)"/>
                     <Label class="card-number text-left" v-else text="0"/>
-                    <Label class="m-10 h4-card-block c-success-text" v-if="diffActivevendor > 0" width="50%" :text=" '+' + this.stringFormat(this.diffActivevendor) + ' vendors'"/>
-                    <Label class="m-10 h4-card-block c-danger" v-else-if="diffActivevendor < 0" width="50%" :text="this.stringFormat(this.diffActivevendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-success-text" v-if="diffActivevendor > 0" width="50%" :text=" '+' + stringFormat(diffActivevendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-danger" v-else-if="diffActivevendor < 0" width="50%" :text="stringFormat(diffActivevendor) + ' vendors'"/>
                 </FlexboxLayout>
                 <FlexboxLayout width="170" class="p-b-15" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Disable vendors"/>
-                    <Label class="card-number text-left" v-if="this.vendor && this.vendor.disable" :text="this.stringFormat(this.vendor.disable)"/>
+                    <Label class="card-number text-left" v-if="vendor && vendor.disable" :text="stringFormat(vendor.disable)"/>
                     <Label class="card-number text-left" v-else text="0"/>
-                    <Label class="m-10 h4-card-block c-success-text" v-if="this.diffDisablevendor > 0"  width="50%" :text="'+' + this.stringFormat(this.diffDisablevendor) + ' vendors'"/>
-                    <Label class="m-10 h4-card-block c-danger" v-else-if="this.diffDisablevendor < 0" width="50%" :text="this.stringFormat(this.diffDisablevendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-success-text" v-if="diffDisablevendor > 0"  width="50%" :text="'+' + stringFormat(diffDisablevendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-danger" v-else-if="diffDisablevendor < 0" width="50%" :text="stringFormat(diffDisablevendor) + ' vendors'"/>
                 </FlexboxLayout>
                 <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                     <Label class="m-10 h4-card-block"  text="Hidden vendors"/>
-                    <Label class="card-number text-left" v-if="this.vendor && this.vendor.hidden" :text="this.stringFormat(this.vendor.hidden)"/>
+                    <Label class="card-number text-left" v-if="vendor && vendor.hidden" :text="stringFormat(vendor.hidden)"/>
                     <Label class="card-number text-left" v-else text="0"/>
-                    <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffHiddenvendor > 0" :text="'+' + this.stringFormat(this.diffHiddenvendor) + ' vendors'"/>
-                    <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffHiddenvendor < 0" :text="this.stringFormat(this.diffHiddenvendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffHiddenvendor > 0" :text="'+' + stringFormat(diffHiddenvendor) + ' vendors'"/>
+                    <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffHiddenvendor < 0" :text="stringFormat(diffHiddenvendor) + ' vendors'"/>
                 </FlexboxLayout>
             </StackLayout>
         </ScrollView>
@@ -57,8 +57,8 @@
             <Carousel class="m-l-10" height="320" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColorUnselected="#404553" indicatorColor="#007afc" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
                 <CarouselItem id="slide1" verticalAlignment="middle">
                     <Label class="h4-card-block m-10 text-left"  text="Total vendor by status"/>
-                    <RadPieChart v-if="this.totalVendorPieGraphData && Boolean(this.totalVendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.totalVendorPieGraphData">
+                    <RadPieChart v-if="totalVendorPieGraphData && Boolean(totalVendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="totalVendorPieGraphData">
                             <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                         </PieSeries>
                         <RadLegendView v-tkPieLegend position="Left" title="vendor" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
@@ -73,8 +73,8 @@
                 <CarouselItem  id="slide2" verticalAlignment="middle">
                     <Label class="h4-card-block m-10 text-left" text="Viven period vendor by status"/>
 
-                    <RadPieChart v-if="this.vendorPieGraphData && Boolean(this.vendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.vendorPieGraphData">
+                    <RadPieChart v-if="vendorPieGraphData && Boolean(vendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="vendorPieGraphData">
                             <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                         </PieSeries>
                         <RadLegendView v-tkPieLegend position="Left" title="vendor" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
@@ -88,8 +88,8 @@
                 </CarouselItem>
                 <CarouselItem id="slide3" verticalAlignment="middle">
                     <Label class="h4-card-block m-10 text-left"  text="Compare period vendor by status"/>
-                    <RadPieChart v-if="this.totalVendorPieGraphData && Boolean(this.compareVendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.compareVendorPieGraphData">
+                    <RadPieChart v-if="totalVendorPieGraphData && Boolean(compareVendorPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                        <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="compareVendorPieGraphData">
                             <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                         </PieSeries>
                         <RadLegendView v-tkPieLegend position="Left" title="vendor" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>

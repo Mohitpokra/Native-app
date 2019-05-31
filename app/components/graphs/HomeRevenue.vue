@@ -6,10 +6,10 @@
             <ScrollView orientation="horizontal">
                 <StackLayout orientation="horizontal">
                      <FlexboxLayout class="p-b-15" flexDirection="column" align-items="flex-start">
-                        <Label class="card-number text-left" v-if="this.totalRevenue" :text="this.stringFormat(Math.floor(this.totalRevenue))"/>
+                        <Label class="card-number text-left" v-if="totalRevenue" :text="stringFormat(Math.floor(totalRevenue))"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffRevenue > 0" :text="'+' + this.stringFormat(this.diffRevenue) + ' revenue'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffRevenue < 0" :text="this.stringFormat(this.diffRevenue) + ' revenue'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffRevenue > 0" :text="'+' + stringFormat(diffRevenue) + ' revenue'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffRevenue < 0" :text="stringFormat(diffRevenue) + ' revenue'"/>
                     </FlexboxLayout>
                 </StackLayout>
             </ScrollView>

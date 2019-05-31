@@ -9,45 +9,45 @@
                 <StackLayout orientation="horizontal">
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Total orders"/>
-                        <Label class="card-number text-left" v-if="this.order && this.order.total" :text="this.stringFormat(this.order.total)"/>
+                        <Label class="card-number text-left" v-if="order && order.total" :text="stringFormat(order.total)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" v-if="diffTotal > 0" width="50%" :text=" '+' + this.stringFormat(this.diffTotal) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffTotal < 0" width="50%" :text=" '-' + this.stringFormat(Math.abs(this.diffTotal)) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-success-text" v-if="diffTotal > 0" width="50%" :text=" '+' + stringFormat(diffTotal) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffTotal < 0" width="50%" :text=" '-' + stringFormat(Math.abs(diffTotal)) + ' orders'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Completed orders"/>
-                        <Label class="card-number text-left" v-if="this.completed" :text="this.stringFormat(this.completed)"/>
+                        <Label class="card-number text-left" v-if="completed" :text="stringFormat(completed)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10h4-card-block  c-success-text" v-if="this.diffCompleted > 0"  width="50%" :text="'+' + this.stringFormat(this.diffCompleted) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" v-else-if="this.diffCompleted < 0" width="50%" :text="  '-'+ this.stringFormat(Math.abs(this.diffCompleted)) + ' orders'"/>
+                        <Label class="m-10h4-card-block  c-success-text" v-if="diffCompleted > 0"  width="50%" :text="'+' + stringFormat(diffCompleted) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" v-else-if="diffCompleted < 0" width="50%" :text="  '-'+ stringFormat(Math.abs(diffCompleted)) + ' orders'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Open orders"/>
-                        <Label class="card-number text-left" v-if="this.open" :text="this.stringFormat(this.open)"/>
+                        <Label class="card-number text-left" v-if="open" :text="stringFormat(open)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffOpen > 0" :text="'+' + this.stringFormat(this.diffOpen) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffOpen < 0" :text=" '-' + this.stringFormat(Math.abs(this.diffOpen)) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffOpen > 0" :text="'+' + stringFormat(diffOpen) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffOpen < 0" :text=" '-' + stringFormat(Math.abs(diffOpen)) + ' orders'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10  h4-card-block"  text="Returned orders"/>
-                        <Label class="card-number text-left" v-if="this.returned" :text="this.stringFormat(this.returned)"/>
+                        <Label class="card-number text-left" v-if="returned" :text="stringFormat(returned)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffReturned > 0" :text="'+' + this.stringFormat(this.diffReturned) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffReturned < 0" :text=" '-' + this.stringFormat(Math.abs(this.diffReturned)) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffReturned > 0" :text="'+' + stringFormat(diffReturned) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffReturned < 0" :text=" '-' + stringFormat(Math.abs(diffReturned)) + ' orders'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10  h4-card-block"  text="Processing orders"/>
-                        <Label class="card-number text-left" v-if="this.processing" :text="this.stringFormat(this.processing)"/>
+                        <Label class="card-number text-left" v-if="processing" :text="stringFormat(processing)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffProcessing > 0" :text="'+' + this.stringFormat(this.diffProcessing) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffProcessing < 0" :text=" '-' + this.stringFormat(Math.abs(this.diffProcessing)) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffProcessing > 0" :text="'+' + stringFormat(diffProcessing) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffProcessing < 0" :text=" '-' + stringFormat(Math.abs(diffProcessing)) + ' orders'"/>
                     </FlexboxLayout>
                     <FlexboxLayout width="170" class="card-bg p-b-15" flexDirection="column" align-items="flex-start">
                         <Label class="m-10 h4-card-block"  text="Cancelled orders"/>
-                        <Label class="card-number text-left" v-if="this.cancelled" :text="this.stringFormat(this.cancelled)"/>
+                        <Label class="card-number text-left" v-if="cancelled" :text="stringFormat(cancelled)"/>
                         <Label class="card-number text-left" v-else text="0"/>
-                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="this.diffCancelled > 0" :text="'+' + this.stringFormat(this.diffCancelled) + ' orders'"/>
-                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="this.diffCancelled < 0" :text=" '-' + this.stringFormat(Math.abs(this.diffCancelled)) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-success-text" width="50%" v-if="diffCancelled > 0" :text="'+' + stringFormat(diffCancelled) + ' orders'"/>
+                        <Label class="m-10 h4-card-block c-danger" width="50%" v-if="diffCancelled < 0" :text=" '-' + stringFormat(Math.abs(diffCancelled)) + ' orders'"/>
                     </FlexboxLayout>
                 </StackLayout>
             </ScrollView>
@@ -57,8 +57,8 @@
                     <CarouselItem id="slide1" verticalAlignment="middle">
                         <Label class="h4-card-block m-10 text-left" text="Given Period order by status"/>
 
-                        <RadPieChart v-if="this.orderPieGraphData && Boolean(this.orderPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.orderPieGraphData">
+                        <RadPieChart v-if="orderPieGraphData && Boolean(orderPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="orderPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="order" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
@@ -73,8 +73,8 @@
 
                     <CarouselItem id="slide2" verticalAlignm\ent="middle">
                         <Label class="h4-card-block m-10 text-left"  text="Compare period order by status"/>
-                        <RadPieChart v-if="this.compareOrderPieGraphData && Boolean(this.compareOrderPieGraphData.length)" height="200" allowAnimation="true" row="0">
-                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="this.compareOrderPieGraphData">
+                        <RadPieChart v-if="compareOrderPieGraphData && Boolean(compareOrderPieGraphData.length)" height="200" allowAnimation="true" row="0">
+                            <PieSeries v-tkPieSeries selectionMode="DataPoint" outerRadiusFactor="0.8" expandRadius="0.2" showLabels="true" valueProperty="count" legendLabel="title" :items="compareOrderPieGraphData">
                                 <PointLabelStyle v-tkPieLabelStyle margin="15"></PointLabelStyle>
                             </PieSeries>
                             <RadLegendView v-tkPieLegend position="Left" title="order" offsetOrigin="TopRight" width="110" enableSelection="true"></RadLegendView>
